@@ -5,6 +5,7 @@ library(raster)
 setwd("C:/lab/") # Windows
 
 #questa funzione serve a importare un'immagine satellitare
+# brick = blocco dei raster
 p224r63_2011 <- brick("p224r63_2011_masked.grd")
 p224r63_2011
 
@@ -116,6 +117,43 @@ plotRGB(p224r63_2011, r=3, g=4, b=2, stretch="hist")
 #install.packages("RStoolbox")
 # library(RStoolbox)
 
+# Multitemporal set
+p224r63_2011 <- brick("p224r63_2011_masked.grd")
+p224r63_2011
+p224r63_1988 <- brick("p224r63_1988_masked.grd")
+p224r63_1988
+# andiamo a plottare le singole bande 
+plot(p224r63_1988)
+
+# mettiamo numeri piuttosto che nomi dei colori perchè chi lo ha programmato ha deciso così
+plotRGB(p224r63_1988, r=3, g=2, b=1, stretch="Lin") # stretch serve a stirare i nostri valori 
+plotRGB(p224r63_1988, r=3, g=2, b=1, stretch="Lin")
+
+# hist
+#creare un par (2,2) con 1988 e 2011
+par(mfrow=c(2,2))
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="hist")
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="hist")
+
+# creo il pdf
+pdf("multitemp.pdf")
+par(mfrow=c(2,2))
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="hist")
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="hist")
+dev.off()
+    
+
+# comando per unire tutti i pdf creati in questo momento
+bash scripting
+pdftk*.pdf cat output mergedfile.pdf
 
 
+
+    
+    
+    
 
