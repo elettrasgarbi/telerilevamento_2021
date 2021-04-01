@@ -108,8 +108,13 @@ plotRGB(p224r63_2011, r=3, g=4, b=2, stretch="Lin")
 plotRGB(p224r63_2011, r=3, g=4, b=2, stretch="hist")
 
 #par natural colours, flase colours, and false colours with histogram stretching
-par(mfrow=(3,1))
-lotRGB(p224r63_2011, r=3, g=2, b=1, stretch="Lin")
+par(mfrow=c(3,1))
+plotRGB(p224r63_2011, r=3, g=2, b=1, stretch="Lin")
+plotRGB(p224r63_2011, r=3, g=4, b=2, stretch="Lin")
+plotRGB(p224r63_2011, r=3, g=4, b=2, stretch="hist")
+
+#install.packages("RStoolbox")
+# library(RStoolbox)
 
 
 
