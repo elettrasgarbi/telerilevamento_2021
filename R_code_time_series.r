@@ -42,3 +42,50 @@ plotRGB(TGr, 4, 3, 2, stretch="Lin")
 
 #installiano un'altra library
 library(rasterVis)
+
+levelplot(TGr$lst_2000) #con level plot abbiamo una gamma di colori molto più ampia    
+#colour and palette per vedere multi temporalmente cosa è successo in queste zone 
+cl <- colorRampPalette(c("blue","light blue","pink","red"))(100)
+levelplot(TGr, col.regions=cl)
+#rinominiamo i vari layer all'interno della nostra immagine 
+levelplot(TGr,col.regions=cl, names.attr=c("July 2000","July 2005", "July 2010", "July 2015"))
+#main è l'argomento e lo mettiamo tra virgolette 
+levelplot(TGr,col.regions=cl, main="LST variation in time",
+          names.attr=c("July 2000","July 2005", "July 2010", "July 2015"))
+
+# scarichiamo meal
+# creiamo una lista di file mealtlist che hanno un pattern comune, cioè melt
+# usiamo la funzione lapply alla lista che abbiamo nominanto per importarli
+# stack funzione che mi unisce tutti i file 
+meltlist <- list.files(pattern="melt")
+melt_import <- lapply(meltlist,raster)
+melt <- stack(melt_import)
+melt
+levelplot(melt) # notiamo differenze tra le strisce di ghiaccio nei vari anni 
+
+# ora applichiamo l'algebra applicata alle matrici 
+#vogliamo fare la sottrazione tra il primo e l'ultimo dato 
+# $ il dollaro mi lega il file originale al file interno 
+melt_amount <- melt$X2007annual_melt - melt$X1979annual_melt
+# creo una nuoca colour and palette 
+clb <- colorRampPalette(c("blue","white","red"))(100)
+plot(melt_amount, col=clb) # zone rosse dove c'è stato uno scioglimento dei ghiacci 
+# usiamo level per avere una gamma di colori più dettagliata 
+levelplot(melt_amount, col.regions=clb)
+
+#installare un nuovo pacchetto knitr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
