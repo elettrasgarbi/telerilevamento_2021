@@ -74,7 +74,7 @@ plot(melt_amount, col=clb) # zone rosse dove c'è stato uno scioglimento dei ghi
 levelplot(melt_amount, col.regions=clb)
 
 #installare un nuovo pacchetto knitr
-
+install.packages("knitr") #https://cran.r-project.org/web/packages/knitr/index.html
 
 
 
