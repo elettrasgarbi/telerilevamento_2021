@@ -28,3 +28,25 @@ sun <- brick("sun.png")
 # Unsupervised classification
 sunc <- unsuperClass(sun, nClasses=3)
 plot(sunc$map)
+
+# Dowload Solar Orbiter data and proceed futher!
+# Grand Canyon 
+# https://landsat.visibleeart.nasa.gov/view.php?id=80948
+# When John Wesley Powell led an expedition dow the Coloraqdo River and 
+
+gc <- brick("dolansprings_oli_2013088_canyon_lrg.jpg")
+plotRGB(gc, r=1, g=2, b=3, stretch="lin")
+plotRGB(gc, r=1, g=2, b=3, stretch="hist")
+
+gcc2 <- unsuperClass(gc, nClasses=2)
+gcc2
+plot(gcc2$map)
+
+# con 4 classi
+gcc4 <- unsuperClass(gc, nClasses=4)
+plot(gcc4$map)
+
+
+
+
+
