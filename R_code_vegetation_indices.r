@@ -32,3 +32,13 @@ defor2
 #names      : defor2.1, defor2.2, defor2.3 
 dvi2 <- defor2$defor2.1 - defor2$defor2.2
 plot(dvi2, col=cl, main="DVI at time 2")
+
+# ora andiamo a vederli entrambi plottandoli insieme usando la funzione PAR
+par(mfrow=c(2,1))
+plot(dvi1, col=cl, main="DVI at time 1")
+plot(dvi2, col=cl, main="DVI at time 2")
+
+
+
+
+
