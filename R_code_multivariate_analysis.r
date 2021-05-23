@@ -43,9 +43,33 @@ pairs(p224r63_2011)
 # banda 1 e banda 2 hanno come indice 0.93, quinid sono correlatissime 
 # sistema di 7 bande 
 
+# funzione aggregate cells = riducimo la dimensione dell'immagine aggregando i pixer 
+# fact = fattore 10 lineare aumentando i nostri pixer
+# aggregate cells: resampling (ricambionamento) 
+p224r63_2011res <- aggregate(p224r63_2011, fact=10)
+p224r63_2011res
+# ora abbiamo allunganto la lunghezza del pixer da 30 a 300
 
+par(mfrow=c(2,1))
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="lin")
+plotRGB(p224r63_2011res, r=4, g=3, b=2, stretch="lin")
 
+# funzione per fare la PCA = rasterPCA, prende il nostre pacchetto di dati e li va a compattare in un numero minore di bande 
+# il pacchetto di riferimento è Rstoolboc che abbiamo già scaricato 
+p224r63_2011res_pca <- rasterPCA(p224r63_2011res)
 
+ 
+# come si fa a legare due oggetti dentro r = $
+# summery = funzione base che ci da un sommario del nostro modello 
+summary(p224r63_2011res_pca$model)
+# lanciato dentro r il comando dice: 0.9983 = spiega il 99% della variabilità 
+
+plot(p224r63_2011res_pca$map)
+# prima componente con tanta informazione e l'ultima con poca informazione 
+p224r63_2011res_pca
+# ora plottiamo in RGB tutta l'immagine con le 3 complonenti principali
+dev.off()
+plotRGB(p224r63_2011res_pca$map, r=1, g=2, b=3, stretch="lin")
 
 
 
