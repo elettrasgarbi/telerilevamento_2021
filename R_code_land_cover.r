@@ -2,7 +2,7 @@
 library(raster)
 library(RStoolbox) #classification
 # install.packages("gridExtra")
-library(gridExtra)
+library(gridExtra) # for grid.arrange  plotting 
 
 # install.packages("ggplot2")
 library(ggplot2)
@@ -77,6 +77,13 @@ percentages
 # let's plot them 
 # usiamo la funzione ggplot 
 ggplot(percentages, aes(x=cover, y=percent_2006, color=cover)) + geom_bar(stat="identity", fill="violet")
+ggplot(percentages, aes(x=cover, y=percent_2006, color=cover)) + geom_bar(stat="identity", fill="yellow")
+
+p1 <- ggplot(percentages, aes(x=cover, y=percent_1992, color=cover)) + geom_bar(stat="identity", fill="green")
+p2 <- ggplot(percentages, aes(x=cover, y=percent_2006, color=cover)) + geom_bar(stat="identity", fill="yellow")
+# uso l funzione grid.arrange per mettere i grafici in una pagina  
+grid.arrange(p1, p2, nrow=1)
+
 
 
 
