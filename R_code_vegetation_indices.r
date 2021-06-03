@@ -2,7 +2,11 @@
 # scarichiamo da virtuale le due immagine sullla cartella lab 
 library(raster) # require(raster) che fa la stessa cosa di library
 library(RStoolbox) # for vegetation indices calculation
+# install.packages("rasterdiv") 
+library(rasterdiv) # fore the worldwide NDVI
 
+#install.packages("rasterVis")
+library(rasterVis)
 setwd("C:/lab/") # Windows
 
 defor1 <- brick("defor1.jpg")
@@ -84,6 +88,17 @@ difndvi <- ndvi1 - ndvi2
 # dev.off()
 cld <- colorRampPalette(c('blue','white','red'))(100) 
 plot(difndvi, col=cld)
+
+#worldwide NDVI
+plot(copNDVI)
+# Pixel with values 253, 254  and 255 (water) will be set as Na's
+# eliminiamo l'acqua dall'immagine 
+copNDVI <- reclassify(copNDVI, cbind(253:255, NA))
+plot(copNDVI)
+
+levelplot(copNDVI)
+ 
+
 
 
 
