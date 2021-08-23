@@ -36,13 +36,18 @@ plot(sunc$map)
 
 gc <- brick("dolansprings_oli_2013088_canyon_lrg.jpg")
 plotRGB(gc, r=1, g=2, b=3, stretch="lin")
+#hist una funzione per allungare e strecciare la nostra immagine ancora di più
 plotRGB(gc, r=1, g=2, b=3, stretch="hist")
 
+#processo di classificazione con al funzione da utilizzare è unsuperClass
+# 2 perchè il numero delle classi sono 2
+# stiamo facendo un modello di classificazione 
 gcc2 <- unsuperClass(gc, nClasses=2)
 gcc2
 plot(gcc2$map)
 
 # con 4 classi
+#la descriminazione avviene solo a livello di riflettanza 
 gcc4 <- unsuperClass(gc, nClasses=4)
 plot(gcc4$map)
 
