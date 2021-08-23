@@ -1,4 +1,4 @@
-# R_code_classification.r 2
+# R_code_classification2.r 
 
 setwd("C:/lab/") # Windows
 
