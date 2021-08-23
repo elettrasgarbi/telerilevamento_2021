@@ -93,6 +93,7 @@ plot(difndvi, col=cld)
 plot(copNDVI)
 # Pixel with values 253, 254  and 255 (water) will be set as Na's
 # eliminiamo l'acqua dall'immagine 
+# con i : diamo il range
 copNDVI <- reclassify(copNDVI, cbind(253:255, NA))
 plot(copNDVI)
 
