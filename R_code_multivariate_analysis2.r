@@ -1,4 +1,4 @@
-# R_code_classification2.r 
+# R_code_multivariate_analysis2.r
 
 setwd("C:/lab/") # Windows
 
