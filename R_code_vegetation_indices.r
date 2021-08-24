@@ -101,7 +101,7 @@ plot(copNDVI)
 levelplot(copNDVI)
  
 
-#codice che funziona
+#ritento di riscrivere il codice 
 # R_code_vegetation-indices
 # carichiamo le librerie
 library(raster)
