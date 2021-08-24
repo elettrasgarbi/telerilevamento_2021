@@ -97,6 +97,7 @@ plot(copNDVI)
 copNDVI <- reclassify(copNDVI, cbind(253:255, NA))
 plot(copNDVI)
 
+#una funzione all'interno del pacchetto rasterVis che fa una media dei valori
 levelplot(copNDVI)
  
 
