@@ -10,6 +10,7 @@ library(RStoolbox)
 # install.packages("ggplot2")
 library(ggplot2)
 defor1 <- brick("defor1.jpg")
+defor2 <- brick("defor2.jpg")
 
 setwd("C:/lab/") # Windows
 
@@ -17,6 +18,7 @@ setwd("C:/lab/") # Windows
 defor1 <- brick("defor1.jpg")
 plotRGB(defor1, r=1, g=3, b=2, stretch="lin")
 ggRGB(defor2, r=1, g=2, b=3, stretch="lin")
+
 
 #per mettere le immagini una difianco all'altra 
 par(mfrow=c(1,2))
@@ -28,21 +30,26 @@ plotRGB(defor2, r=1, g=2, b=3, stretch="lin")
 p1 <- ggRGB(defor1, r=1, g=2, b=3, stretch="lin")
 p2 <- ggRGB(defor2, r=1, g=2, b=3, stretch="lin")
 grid.arrange(p1, p2, nrow=2)
- 
-# unsupervised classification
+dev.oof() 
+
+# unsupervised classification = l'inizio non viene supervisionato da noi, ma fa tutto il software
 d1c <- unsuperClass(defor1, nClasses=2)
 plot(d1c$map)
 
 #set.seed() would allow you to attain the same results...
+#creiamo la seconda mappa prendendo la seconda immagine deford 2 
 d2c <- unsuperClass(defor2, nClasses=2)
 plot(d2c$map)
+
+
 #class1: agriculture
 #class2: forest 
 
 d2c3 <- unsuperClass(defor2, nClasses=3)
 plot(d2c3$map)
 
-#frequencies
+#calcoliamo le frequenza dei pixer
+#frequencies = funzione che va a calcolare la frequenza
 freq(d1c$map)
 # value  count
 # [1,]     1 307392
@@ -52,8 +59,9 @@ freq(d1c$map)
 #facciamo la somma dei valori 
 s1 <- 307392 + 33900
 s1
-# [1] 341292
+# [1] 341292 che deve essere uguale per tutti 
 
+#per lalcolare la proporzione facciamo la frequenza fratto il totale
 prop1 <- freq(d1c$map) / s1
 prop1
 # proporzione foresta:0.90067157
@@ -64,6 +72,12 @@ prop2 <- freq(d2c$map) / s2
 prop2
 # proporzione forest:0.5219476
 # proporzione agricolo: 0.4780524
+
+#una cosa che si può fare è la percentuali
+
+# prima colonna dove mettiamo i fattori doce ci sarà forest e agricolture
+#seconda colonna mettiamo la percentuale corrispondente 
+# usiamo la funzione Dataframe che ci crea una tabellina 
 
 # si possono usare anche le percentuali, moltiplicando per 100 le proporzioni 
 #ora generiamo un dataset che in R si chiama dataframe 
@@ -80,13 +94,15 @@ percentages
 #2 Agricolture         9.93        47.80
 
 # let's plot them 
-# usiamo la funzione ggplot 
-ggplot(percentages, aes(x=cover, y=percent_2006, color=cover)) + geom_bar(stat="identity", fill="violet")
+# usiamo la funzione ggplot = del nostro file
+# color si riferisce a quali oggetti vogliamo descriminare nel nostro grafico
+ggplot(percentages, aes(x=cover, y=percent_1992, color=cover)) + geom_bar(stat="identity", fill="violet")
 ggplot(percentages, aes(x=cover, y=percent_2006, color=cover)) + geom_bar(stat="identity", fill="yellow")
 
+#voglio metterli in un unico grafico della prima e seconda data 
 p1 <- ggplot(percentages, aes(x=cover, y=percent_1992, color=cover)) + geom_bar(stat="identity", fill="green")
 p2 <- ggplot(percentages, aes(x=cover, y=percent_2006, color=cover)) + geom_bar(stat="identity", fill="yellow")
-# uso l funzione grid.arrange per mettere i grafici in una pagina  
+# uso l funzione grid.arrange per mettere i grafici in una pagina  della gridextra già installato
 grid.arrange(p1, p2, nrow=1)
 
 
