@@ -91,6 +91,31 @@ geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer))
 
 #metodo migliore a livello geografico per individuare qualsiasi discontinuità
 
+#la funzione scale_fill_viridis che utilizziano
+ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis()
 
+#se vogliamo mettere un titolo la funzione si chiama ggtitle
+p1 <- ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis()  +
+ggtitle("Standard deviation of PC1 by viridis colour scale")
+
+#proviamo a utilizzare magma come colorazione
+p2 <- ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis(option = "magma")  +
+ggtitle("Standard deviation of PC1 by magma colour scale")
+
+# tutte le opzioni le vedo qui --> https://www.rdocumentation.org/packages/viridis/versions/0.6.1/topics/scale_fill_viridis
+# tutte le zone vengono bene quando abbiamo una alta deviazione standard
+p3 <- ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis(option = "inferno")  +
+ggtitle("Standard deviation of PC1 by inferno colour scale")
+
+#ogni plot precedente lo associamo a un oggetto
+grid.arrange(p1, p2, p3, nrow = 1)
 
 
