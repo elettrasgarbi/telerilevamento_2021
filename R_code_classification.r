@@ -20,6 +20,9 @@ plot(soc$map)
 soc20 <- unsuperClass(so, nClasses=20)
 plot(soc20$map)
 
+cl <- colorRampPalette(c('yellow', 'black', 'red'))(100)
+plot(soc20$map,col=cl)
+
 #  Dowload an image from:
 # https://www.esa.int/ESA_Multimedia/Missions/Solar_Orbiter/(result_type)/images
 
