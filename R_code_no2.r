@@ -26,9 +26,37 @@ plot(EN01, col=cls)
 # 4. importiamo l'ultima immagine (13) e la plottiamo con la stessa previous Color Ramp Palette
 
 EN13 <- raster("EN_0013.png")
-plot(EN13)
 
-cls <- colorRampPalette(c("red","pink","orange","yellow")) (200)
 plot(EN13, col=cls)
 
 # 5. andiamo ad associare a un oggetto la differenza delle due immagini e la plottiamo 
+# con questa operazione vedimo la differenza tra la banda di Marzo e la banda di Gennaio
+ENdif <- EN13 - EN01
+plot (ENdif, col=cls)
+
+# 6.ora faccimo il plot di tuttto, tutto insieme 
+# la funzione da usare è par, e stabiliamo il numero di righe e il numero di colonne 
+
+par(mfrow=c(3,1))
+plot(EN01, col=cls, main="NO2 in January")
+plot(EN13, col=cls, main="NO2 in March")
+plot(ENdif, col=cls, main="Different (January - March)")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
