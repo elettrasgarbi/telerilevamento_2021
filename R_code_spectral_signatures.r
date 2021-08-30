@@ -76,3 +76,19 @@ click(defor1, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
 #1 67.5 393.5 60296      203       31       31
 
 
+
+# adniamo a farsi dele spectral signatur della immagine defor2
+plotRGB(defor2, r=1, g=2, b=3, stretch="lin")
+click(defor2, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
+
+# x     y   cell defor2.1 defor2.2 defor2.3
+#1 100.5 309.5 120557      177      142      140
+#     x     y   cell defor2.1 defor2.2 defor2.3
+#1 78.5 331.5 104761      207      209      188
+#      x     y   cell defor2.1 defor2.2 defor2.3
+#1 100.5 327.5 107651      177      161      146
+#      x     y  cell defor2.1 defor2.2 defor2.3
+#1 108.5 352.5 89734      200      172      158
+#     x     y  cell defor2.1 defor2.2 defor2.3
+#1 87.5 360.5 83977      170      157      138
+
