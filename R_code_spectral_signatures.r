@@ -92,3 +92,54 @@ click(defor2, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
 #     x     y  cell defor2.1 defor2.2 defor2.3
 #1 87.5 360.5 83977      170      157      138
 
+#ora creiamo il dataset con le colonne da definire 
+band <- c(1,2,3) #le colonne sono sempre le stesse
+time1 <- c(198, 11,18)
+time1p2 <- c(183,176,166)   #time 1 e il secondo pixel e così cia 
+time2 <- c(177,142,140)
+time2p2 <- c(207,209,188)
+#ora andiamo a fare il data.frame con la funzione spectrals
+spectralst <- data.frame(band, time1, time2, time1p2, time2p2) #spectrals t perchè temporale
+
+#ora andiamo a plottare il tutto 
+ggplot(spectralst, aes(x=band)) +
+ geom_line(aes(y=time1), color="red", linetype="dotted") +     #possiamo cambiare lo spessore della linea con linetype e vengono delle linee tratteggiate
+ geom_line(aes(y=time1p2), color="red", linetype="dotted") +
+ geom_line(aes(y=time2), color="green", linetype="dotted") +
+ geom_line(aes(y=time2p2), color="green", linetype="dotted") +
+ labs(x="band",y="reflectance")
+
+#andiamo sul sito nata Matters e andiamo a sceglierci un'immagine #https://earthobservatory.nasa.gov/blogs/earthmatters/2021/06/15/june-puzzler-7/
+#image from Earth Observatorty
+
+eo <- brick ("ISS006-E-43366_lrg.jpg")
+plotRGB(eo, r=1, g=2, b=3, stretch="hist")
+click(eo, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
+
+# x      y   cell ISS006.E.43366_lrg.1 ISS006.E.43366_lrg.2
+#1 463.5 1812.5 579576                   24                   13
+#  ISS006.E.43366_lrg.3
+#1                   27
+#       x      y    cell ISS006.E.43366_lrg.1 ISS006.E.43366_lrg.2
+#1 1243.5 1535.5 1420220                  106                   86
+#  ISS006.E.43366_lrg.3
+#1                   61
+#       x      y    cell ISS006.E.43366_lrg.1 ISS006.E.43366_lrg.2
+#1 1511.5 1190.5 2466528                  188                  183
+#  ISS006.E.43366_lrg.3
+#1                  180
+
+band <- c(1,2,3)
+stratum1 <- c(24,13,37)
+stratum2 <- c(106,86,61)
+stratum3 <- c(188,183,180)
+
+spectralsg <- data.frame(band, stratum1, stratum2, stratum3) #spectrals g perchè geology
+#plottiamo lo spectral signature
+ggplot(spectralst, aes(x=band)) +
+ geom_line(aes(y=stratum1), color="yellow", linetype="dotted") +     #possiamo cambiare lo spessore della linea con linetype e vengono delle linee tratteggiate
+ geom_line(aes(y=stratum2), color="green", linetype="dotted") +
+ geom_line(aes(y=stratum3), color="red", linetype="dotted") +
+ labs(x="band",y="reflectance")
+
+
