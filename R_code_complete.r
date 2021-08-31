@@ -17,6 +17,8 @@
 # 11. R code spectral signature
 
 #---------------------------------------------------------------------------------------------------------------------
+
+# 1. Remote sensing first code
 # Il mio primo codice in R per il telerilevamento!
 
 # install.packages("raster")
@@ -649,7 +651,7 @@ library(raster)
 library(RStoolbox) #classification
 # install.packages("gridExtra")
 library(gridExtra) # for grid.arrange  plotting 
-#mi permette di non far venir fuori errori tichiamando le due librerie 
+#mi permette di non far venir fuori errori richiamando le due librerie 
 library(ggplot2)
 library(RStoolbox)
 
