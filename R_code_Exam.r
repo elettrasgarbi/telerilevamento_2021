@@ -23,18 +23,33 @@ import <- lapply(clist,raster)
 # per ottenre le informazioni sui file
 import
 # Funzione stack: raggruppa e rinomina, in un unico pacchetto, i file raster separati
-TGa <- stack(import)
+ACi <- stack(import)
 # Funzione per avere le info sul file
-TGa
+ACi
 # Funzione plot: del singolo file
-plot(TGa)
+plot(ACi)
 # Funzione plotRGB: crea plot con immagini sovrapposte
-plotRGB(TGa, 1, 2, 3, stretch="hist")
+plotRGB(ACi, 3, 2, 1, stretch="hist")
 # Funzione ggr: plotta file raster in differenti scale di grigio, migliorando la qualità dell'immagine e aggiungengo le coordinate spaziali sugli assi x e y
-ggRGB(TGa, r=3, g=2, b=1, stretch="hist) # "hist": amplia i valori e aumenta i dettagli
+ggRGB(ACi, r=3, g=2, b=1, stretch="hist") # "hist": amplia i valori e aumenta i dettagli
 
+# Funzione levelplot: disegna più grafici di colore falso con una singola legenda
+levelplot(ACi)
+# Cambio di colori a piacimento (colorRampPalette si può usare solo su immagine singole, non su RGB)
+cls<-colorRampPalette(c("white","blue","yellow","green"))(100)
+# Nuovo levelplot col cambio di colori, nome e titolo
+levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1989","1995", "2001", "2005", "2013", "2019"))
 
+#............................................................................................................................................................
 
+# Plot di tutte le correlazioni tra bande di un dataset (matrice di scatterplot di dati, non immagini)
+# La tabella riporta in diagonale le bande (sono le variabili), l'indice di correlazione varia da 0(negativo) a 1 (positivo)
+pairs(TGa)
+# Indice di correlazione: più le bande sono correlate e maggiore sarà la dimensione dei caratteri
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# MULTIVARIATE ANALYSIS
 
 
 
