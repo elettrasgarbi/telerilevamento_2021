@@ -45,7 +45,7 @@ levelplot(ACi)
 # Cambio di colori a piacimento (colorRampPalette si può usare solo su immagine singole, non su RGB)
 cls<-colorRampPalette(c("white","blue","yellow","green"))(100)
 # Nuovo levelplot col cambio di colori, nome e titolo
-levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1989","1995", "2001", "2005", "2013", "2019"))
+levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
 
 #............................................................................................................................................................
 
@@ -66,7 +66,7 @@ pairs(ACi, main="Comparation with the function pairs")
 # Importazione delle singole immagini per effettuare comparazioni
 # Funzione: brick, importa i singoli file per avere dati e immagini a 3 bande
 # Non utilizzo la funzione raster perchè successivamente farò l'analisi della PCA nella quale servono almeno 2 bande 
-Columbia1989 <- brick("1 columbia_tm5_1986209_lrg.jpg")
+Columbia1986 <- brick("1 columbia_tm5_1986209_lrg.jpg")
 Columbia1995 <- brick("2 columbia_tm5_1995202_lrg.jpg")
 Columbia2001 <- brick("3 columbia_etm_2001258_lrg.jpg")
 Columbia2005 <- brick("4 columbia_tm5_2005245_lrg.jpg")
@@ -77,16 +77,16 @@ Columbia2019 <- brick("6 columbiaglacier653_oli_2019172_lrg.jpg")
 
 # 2. Analisi delle componenti principali
 
-# PCA del ghiacciaio Columbia 1989
-Columbia1989_pca <- rasterPCA(Columbia1989)
-summary(Columbia1989_pca$model)
+# PCA del ghiacciaio Columbia 1986
+Columbia1986_pca <- rasterPCA(Columbia1986)
+summary(Columbia1986_pca$model)
 # Importance of components:
 #                            Comp.1     Comp.2      Comp.3
 # Standard deviation     109.2553346 59.9319584 27.67877126
 # Proportion of Variance   0.7325536  0.2204302  0.04701622
 # Cumulative Proportion    0.7325536  0.9529838  1.00000000
-plotRGB(Columbia1989_pca$map,r=1,g=2,b=3, stretch="Hist")
-plot(Columbia1989_pca$model) # per vedere il grafico
+plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist")
+plot(Columbia1986_pca$model) # per vedere il grafico
 
 # PCA del ghiacciaio Columbia 1995
 Columbia1995_pca <- rasterPCA(Columbia1995)
@@ -144,23 +144,25 @@ summary(Columbia2019_pca$model)
 plotRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist")
 plot(Columbia2019_pca$model) # per vedere il grafico
 
-# confrontiamo le PCA ottenute dal 1989 al 2019
+# confrontiamo le PCA ottenute dal 1986 al 2019
+levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
+
 par(mfrow=c(2,3)) # 3 colonne e 2 righe
-plotRGB(Columbia1989_pca$map,r=1,g=2,b=3, stretch="Hist")
-plotRGB(Columbia1995_pca$map,r=1,g=2,b=3, stretch="Hist")
+plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, X$y, X$z, xlab="valori di Y",ylab="valori di X", stretch="Hist") #?????????????????????????????????????????????????????
+plotRGB(Columbia1995_pca$map,r=1,g=2,b=3, X$y, X$z, xlab="valori di Y",ylab="valori di X", stretch="Hist")
 plotRGB(Columbia2001_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2005_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2013_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist")
 
 # Multiframe con ggplot
-Co1989 <- ggRGB(Columbia1989_pca$map,r=1,g=2,b=3, stretch="Hist")
+Co1986 <- ggRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co1995 <- ggRGB(Columbia1995_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co2001 <- ggRGB(Columbia2001_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co2005 <- ggRGB(Columbia2005_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co2013 <- ggRGB(Columbia2013_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co2019 <- ggRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist")
-grid.arrange(Co1989, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2)
+grid.arrange(Co1986, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2)
 
 #......................................................................................................................................................
 
@@ -168,9 +170,152 @@ grid.arrange(Co1989, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2)
 
 # La funzione spectralIndices permette di calcolare tutti gli indici
 # b1=NIR, b2=rosso, b3=verde
-# Immagine del ghiacciaio Columbia in Alaska nel 1989 
-spCo1989 <- spectralIndices(Columbia1989, green = 3, red = 2, nir = 1) #colori associati al N° della banda
+# Immagine del ghiacciaio Columbia in Alaska nel 1986 
+spCo1986 <- spectralIndices(Columbia1986, green = 3, red = 2, nir = 1) #colori associati al N° della banda
 # Cambio i colori con colorRampPalette
-cl <- colorRampPalette(c('darkblue','yellow','red','black'))(100)
+cl <- colorRampPalette(c('purple','yellow','light pink','orange'))(100)
 # Nuovo plot col cambio di colori
-plot(spCo1989, col=cl)
+plot(spCo1986, col=cl)
+
+# Immagine del ghiacciaio Columbia in Alaska nel 1995 
+spCo1995 <- spectralIndices(Columbia1995, green = 3, red = 2, nir = 1) #colori associati al N° della banda
+# Nuovo plot col cambio di colori
+plot(spCo1995, col=cl)
+
+# Immagine del ghiacciaio Columbia in Alaska nel 2001 
+spCo2001 <- spectralIndices(Columbia2001, green = 3, red = 2, nir = 1) #colori associati al N° della banda
+# Nuovo plot col cambio di colori
+plot(spCo2001, col=cl)
+
+# Immagine del ghiacciaio Columbia in Alaska nel 20005
+spCo2005 <- spectralIndices(Columbia2005, green = 3, red = 2, nir = 1) #colori associati al N° della banda
+# Nuovo plot col cambio di colori
+plot(spCo2005, col=cl)
+
+# Immagine del ghiacciaio Columbia in Alaska nel 2013
+spCo2013 <- spectralIndices(Columbia2013, green = 3, red = 2, nir = 1) #colori associati al N° della banda
+# Nuovo plot col cambio di colori
+plot(spCo2013, col=cl)
+
+# Immagine del ghiacciaio Columbia in Alaska nel 2019 
+spCo2019 <- spectralIndices(Columbia2019, green = 3, red = 2, nir = 1) #colori associati al N° della banda
+# Nuovo plot col cambio di colori
+plot(spCo2019, col=cl)
+
+# 1. DVI - Difference Vegetation Index
+
+# guardo come si chiamano le bande del NIR e del ROSSO. 
+Columbia1986
+#B1(NIR)= X1_columbia_tm5_1986209_lrg.1; B2(RED)=X1_columbia_tm5_1986209_lrg.2
+Columbia1995
+#B1(NIR)=X2_columbia_tm5_1995202_lrg.1; B2(RED)=X2_columbia_tm5_1995202_lrg.2
+Columbia2001
+#B1(NIR)=X3_columbia_etm_2001258_lrg.1; B2(RED)=X3_columbia_etm_2001258_lrg.2
+Columbia2005
+#B1(NIR)=X4_columbia_tm5_2005245_lrg.1; B2(RED)=X4_columbia_tm5_2005245_lrg.2
+Columbia2013
+#B1(NIR)=X5_columbia_oli_2013203_lrg.1; B2(RED)=X5_columbia_oli_2013203_lrg.2
+Columbia2019
+#B1(NIR)= X6_columbiaglacier653_oli_2019172_lrg.1; B2(RED)=X6_columbiaglacier653_oli_2019172_lrg.2
+
+
+
+# Primo indice del ghiacciaio Columbia in Alaska nel 1986: NIR - RED
+dvi1 <- Columbia1986$X1_columbia_tm5_1986209_lrg.1 - Columbia1986$X1_columbia_tm5_1986209_lrg.2
+plot(dvi1)
+cld <- colorRampPalette(c('yellow','purple','green','light blue'))(100)
+plot(dvi1, col=cld, main="DVI of Columbia 1986")
+
+# Primo indice del ghiacciaio Columbia in Alaska nel 1995: NIR - RED
+dvi2 <- Columbia1995$X2_columbia_tm5_1995202_lrg.1 - Columbia1995$X2_columbia_tm5_1995202_lrg.2
+plot(dvi2)
+plot(dvi2, col=cld, main="DVI of Columbia 1995")
+
+# Primo indice del ghiacciaio Columbia in Alaska nel 2001: NIR - RED
+dvi3 <- Columbia2001$X3_columbia_etm_2001258_lrg.1 - Columbia2001$X3_columbia_etm_2001258_lrg.2
+plot(dvi3)
+plot(dvi3, col=cld, main="DVI of Columbia 2001")
+
+# Primo indice del ghiacciaio Columbia in Alaska nel 2005: NIR - RED
+dvi4 <- Columbia2005$X4_columbia_tm5_2005245_lrg.1 - Columbia2005$X4_columbia_tm5_2005245_lrg.2
+plot(dvi4)
+plot(dvi4, col=cld, main="DVI of Columbia 2005")
+
+# Primo indice del ghiacciaio Columbia in Alaska nel 2013: NIR - RED
+dvi5 <- Columbia2013$X5_columbia_oli_2013203_lrg.1 - Columbia2013$X5_columbia_oli_2013203_lrg.2
+plot(dvi5)
+plot(dvi5, col=cld, main="DVI of Columbia 2013")
+
+# Primo indice del ghiacciaio Columbia in Alaska nel 2019: NIR - RED
+dvi6 <- Columbia2019$X6_columbiaglacier653_oli_2019172_lrg.1 - Columbia2019$X6_columbiaglacier653_oli_2019172_lrg.2
+plot(dvi6)
+plot(dvi6, col=cld, main="DVI of Columbia 2019")
+
+# Confronto il tutto per far emergere le differenze 
+par(mfrow=c(2,3))
+plot(dvi1, col=cld, main="DVI of Columbia 1986")
+plot(dvi2, col=cld, main="DVI of Columbia 1995")
+plot(dvi3, col=cld, main="DVI of Columbia 2001")
+plot(dvi4, col=cld, main="DVI of Columbia 2005")
+plot(dvi5, col=cld, main="DVI of Columbia 2013")
+plot(dvi6, col=cld, main="DVI of Columbia 2019")
+
+
+difdvi <- (dvi1 - dvi2) - (dvi3 - dvi4) - (dvi5 - dvi6)
+cldd <- colorRampPalette(c('blue','white','red'))(100)
+plot(difdvi, col=cldd)
+
+
+# 2. NDVI - Normalized Difference Vegetation Index
+
+# NDVI= (NIR-RED) / (NIR+RED)
+# NDVI del ghiacciaio Columbia in Alaska nel 1986
+ndvi1 <- (dvi1) / (Columbia1986$X1_columbia_tm5_1986209_lrg.1 + Columbia1986$X1_columbia_tm5_1986209_lrg.2)
+plot(ndvi1, col=cld, main="NDVI of Columbia 1986")
+
+# NDVI del ghiacciaio Columbia in Alaska nel 1995
+ndvi2 <- (dvi2) / (Columbia1995$X2_columbia_tm5_1995202_lrg.1 + Columbia1995$X2_columbia_tm5_1995202_lrg.2)
+plot(ndvi2, col=cld, main="NDVI of Columbia 1995")
+
+# NDVI del ghiacciaio Columbia in Alaska nel 2001
+ndvi3 <- (dvi3) / (Columbia2001$X3_columbia_etm_2001258_lrg.1 + Columbia2001$X3_columbia_etm_2001258_lrg.2)
+plot(ndvi3, col=cld, main="NDVI of Columbia 2001")
+
+# NDVI del ghiacciaio Columbia in Alaska nel 2005
+ndvi4 <- (dvi4) / (Columbia2005$X4_columbia_tm5_2005245_lrg.1 + Columbia2005$X4_columbia_tm5_2005245_lrg.2)
+plot(ndvi4, col=cld, main="NDVI of Columbia 2005")
+
+# NDVI del ghiacciaio Columbia in Alaska nel 2013
+ndvi5 <- (dvi5) / (Columbia2013$X5_columbia_oli_2013203_lrg.1 + Columbia2013$X5_columbia_oli_2013203_lrg.2)
+plot(ndvi5, col=cld, main="NDVI of Columbia 2013")
+
+# NDVI del ghiacciaio Columbia in Alaska nel 2019
+ndvi6 <- (dvi6) / (Columbia2019$X6_columbiaglacier653_oli_2019172_lrg.1 + Columbia2019$X6_columbiaglacier653_oli_2019172_lrg.2)
+plot(ndvi6, col=cld, main="NDVI of Columbia 2019")
+
+# Confronto il tutto per far emergere le differenze
+par(mfrow=c(2,3))
+plot(ndvi1, col=cld, main="NDVI of Columbia 1986")
+plot(ndvi2, col=cld, main="NDVI of Columbia 1995")
+plot(ndvi3, col=cld, main="NDVI of Columbia 2001")
+plot(ndvi4, col=cld, main="NDVI of Columbia 2005")
+plot(ndvi5, col=cld, main="NDVI of Columbia 2013")
+plot(ndvi6, col=cld, main="NDVI of Columbia 2019")
+
+# Differenza del NDVI
+difndvi <- (ndvi1 - ndvi2) - (ndvi3 - ndvi4) - (ndvi5 - ndvi5)
+plot(difndvi, col=cldd)
+
+#.....................................................................................................................................
+
+# FIRME SPETTRALI
+
+# Creo una firma spettrale dell'immagine Columbia 1986 con la funzione "click"
+plotRGB(Columbia1986, r=1, g=2, b=3, stretch="lin")
+click(Columbia1986, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
+# In a pixel of vegetation -> B1= very high value, B2=low value, B3= average value
+# In a pixel of water -> B1= low value, B2= high value, B3= very high value
+# Results:
+
+
+
