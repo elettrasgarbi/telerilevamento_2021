@@ -316,6 +316,24 @@ click(Columbia1986, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
 # In a pixel of vegetation -> B1= very high value, B2=low value, B3= average value
 # In a pixel of water -> B1= low value, B2= high value, B3= very high value
 # Results:
+# x     y    cell X1_columbia_tm5_1986209_lrg.1 X1_columbia_tm5_1986209_lrg.2 X1_columbia_tm5_1986209_lrg.3
+#1 969.5 129.5 1824970                             5                           142                           186
+#     x     y    cell X1_columbia_tm5_1986209_lrg.1 X1_columbia_tm5_1986209_lrg.2 X1_columbia_tm5_1986209_lrg.3
+# 1 950.5 405.5 1295031                             8                           104                           152
+#      x     y   cell X1_columbia_tm5_1986209_lrg.1 X1_columbia_tm5_1986209_lrg.2 X1_columbia_tm5_1986209_lrg.3
+# 1 905.5 599.5 922506                            20                           181                           209
+
+
+# Creo una firma spettrale dell'immagine Columbia 2019 con la funzione "click"
+plotRGB(Columbia2019, r=1, g=2, b=3, stretch="lin")
+click(Columbia2019, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
+# In a pixel of vegetation -> B1= very high value, B2=low value, B3= average value
+# In a pixel of water -> B1= low value, B2= high value, B3= very high value
+# Results:
+# x     y    cell X6_columbiaglacier653_oli_2019172_lrg.1 X6_columbiaglacier653_oli_2019172_lrg.2 X6_columbiaglacier653_oli_2019172_lrg.3
+# 1 978.5 175.5 1736659                                      12                                      29                                      55
+# 2 953.5 368.5 1366074                                       9                                      32                                      73
+# 3 908.5 592.5  935949                                       8                                      28                                      81
 
 
 
