@@ -50,9 +50,6 @@ levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c(
 #............................................................................................................................................................
 
 
-
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 # MULTIVARIATE ANALYSIS
 
 # 1. Le coppie di funzioni producono una matrice di scatterplot.
@@ -62,7 +59,7 @@ levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c(
 # Plot di tutte le correlazioni tra bande di un dataset (matrice di scatterplot di dati, non immagini)
 # La tabella riporta in diagonale le bande (sono le variabili)
 pairs(ACi, main="Comparation with the function pairs")
-# Result= 0.9
+# Result= 0.81
 # Indice di correlazione: più le bande sono correlate e maggiore sarà la dimensione dei caratteri
 
 
@@ -165,3 +162,15 @@ Co2013 <- ggRGB(Columbia2013_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co2019 <- ggRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist")
 grid.arrange(Co1989, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2)
 
+#......................................................................................................................................................
+
+# Spectral Indices
+
+# La funzione spectralIndices permette di calcolare tutti gli indici
+# b1=NIR, b2=rosso, b3=verde
+# Immagine del ghiacciaio Columbia in Alaska nel 1989 
+spCo1989 <- spectralIndices(Columbia1989, green = 3, red = 2, nir = 1) #colori associati al N° della banda
+# Cambio i colori con colorRampPalette
+cl <- colorRampPalette(c('darkblue','yellow','red','black'))(100)
+# Nuovo plot col cambio di colori
+plot(spCo1989, col=cl)
