@@ -326,6 +326,8 @@ click(Columbia1986, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
 
 # Creo una firma spettrale dell'immagine Columbia 2019 con la funzione "click"
 plotRGB(Columbia2019, r=1, g=2, b=3, stretch="lin")
+# Bisogna avere la mappa fatta con plotRGB aperta sotto
+# Utilizzo la funzione click per cliccare sull'immagine plotRGB e le firme spettrali 
 click(Columbia2019, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
 # In a pixel of vegetation -> B1= very high value, B2=low value, B3= average value
 # In a pixel of water -> B1= low value, B2= high value, B3= very high value
@@ -335,5 +337,50 @@ click(Columbia2019, id=T, xy=T, cell=T, type="p", pch=16, col="yellow")
 # 2 953.5 368.5 1366074                                       9                                      32                                      73
 # 3 908.5 592.5  935949                                       8                                      28                                      81
 
+# Creo ora un set di dati con i nostri risultati, definendo le colonne del dataset
+band <- c(1,2,3)
+Columbia1986p1 <- c(5, 142, 186)
+Columbia1986p2 <- c(8, 104, 152)
+Columbia1986p3 <- c(20, 181, 209)
+Columbia2019p1 <- c(12, 29, 55)
+Columbia2019p2 <- c(9, 32, 73)
+Columbia2019p3 <- c(8, 28, 81)
+
+# Funzione data.frame: crea un dataframe (tabella)
+spectralCo <- data.frame(band,Columbia1986p1,Columbia1986p2,Columbia1986p3,Columbia2019p1,Columbia2019p2,Columbia2019p3)
+
+# richiamo spectralst per avere le info sul file
+spectralCo
+# band Columbia1986p1 Columbia1986p2 Columbia1986p3 Columbia2019p1 Columbia2019p2 Columbia2019p3
+# 1    1              5              8             20             12              9              8
+# 2    2            142            104            181             29             32             28
+# 3    3            186            152            209             55             73             81
+
+
+# Plot delle firme spettrali
+# Utilizzo la funzione ggplot per determinare l'estetica del grafico
+# Rosso per i risultati del 2019, blu per i risultati del 2021
+# Funzione geom_line: connette le osservazioni a seconda del dato che è sulla X/Y
+# Funzione labs: modifica le etichette degli assi, le legende e il plottaggio
+ggplot(spectralCo, aes(x=band)) +
+geom_line(aes(y = Columbia1986p1), color="blue") +
+geom_line(aes(y = Columbia1986p2), color="blue") +
+geom_line(aes(y = Columbia1986p3), color="blue") +
+geom_line(aes(y = Columbia2019p1), color="red") +
+geom_line(aes(y = Columbia2019p2), color="red") +
+geom_line(aes(y = Columbia2019p3), color="red") +
+labs(x="band", y="reflectance")
+
+# Traccio questo set di dati con altri colori
+# Il colore chiaro rappresenta i risultati del 1986, il colore scuro rappresenta i risultati del 2019
+ggplot(spectralCo, aes(x=band)) +
+geom_line(aes(y = Columbia1986p1), color="light blue") +
+geom_line(aes(y = Columbia1986p2), color="pink") +
+geom_line(aes(y = Columbia1986p3), color="yellow") +
+geom_line(aes(y = Columbia2019p1), color="orange") +
+geom_line(aes(y = Columbia2019p2), color="blue") +
+geom_line(aes(y = Columbia2019p3), color="purple") +
+labs(x="band", y="reflectance")
+#questo procedimento normalmente si fa con moltissimi pixel. si usa una funzione per la generazione dei punti random e poi un'altra per estrarre da tutti i valori delle bande
 
 
