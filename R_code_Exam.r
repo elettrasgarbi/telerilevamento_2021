@@ -90,10 +90,11 @@ Columbia2019 <- brick("6 columbiaglacier653_oli_2019172_lrg.jpg")
 Columbia1986_pca <- rasterPCA(Columbia1986)
 summary(Columbia1986_pca$model)
 # Importance of components:
-#                            Comp.1     Comp.2      Comp.3
+#                             Comp.1     Comp.2      Comp.3
 # Standard deviation     109.2553346 59.9319584 27.67877126
 # Proportion of Variance   0.7325536  0.2204302  0.04701622
 # Cumulative Proportion    0.7325536  0.9529838  1.00000000
+
 plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist")
 plot(Columbia1986_pca$model) # per vedere il grafico
 
@@ -157,15 +158,15 @@ plot(Columbia2019_pca$model) # per vedere il grafico
 levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
 
 par(mfrow=c(2,3)) # 3 colonne e 2 righe
-plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, X$y, X$z, xlab="valori di Y",ylab="valori di X", stretch="Hist") #?????????????????????????????????????????????????????
-plotRGB(Columbia1995_pca$map,r=1,g=2,b=3, X$y, X$z, xlab="valori di Y",ylab="valori di X", stretch="Hist")
+plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist") 
+plotRGB(Columbia1995_pca$map,r=1,g=2,b=3, stretch="Hist") 
 plotRGB(Columbia2001_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2005_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2013_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist")
 
 # Multiframe con ggplot
-Co1986 <- ggRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist")
+Co1986 <- ggRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist")       #????????????????????????????????????????????????????? come mettere il titolo 
 Co1995 <- ggRGB(Columbia1995_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co2001 <- ggRGB(Columbia2001_pca$map,r=1,g=2,b=3, stretch="Hist")
 Co2005 <- ggRGB(Columbia2005_pca$map,r=1,g=2,b=3, stretch="Hist")
@@ -395,60 +396,82 @@ labs(x="band", y="reflectance")
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
 #effettuiamo una categorizzazione in 3 classi di colore per distinguere le zone con ghiaccio, con acqua e "altro"
-CoAlask1 <- unsuperClass(Columbia1986, nClasses=3)  
-CoAlask2 <- unsuperClass(Columbia1995, nClasses=3)  
-CoAlask3 <- unsuperClass(Columbia2001, nClasses=3)  
-CoAlask4 <- unsuperClass(Columbia2005, nClasses=3)  
-CoAlask5 <- unsuperClass(Columbia2013, nClasses=3)  
-CoAlask6 <- unsuperClass(Columbia2019, nClasses=3) 
+CoAlask1 <- unsuperClass(Columbia1986, nClasses=4)  
+CoAlask2 <- unsuperClass(Columbia1995, nClasses=4)  
+CoAlask3 <- unsuperClass(Columbia2001, nClasses=4)  
+CoAlask4 <- unsuperClass(Columbia2005, nClasses=4)  
+CoAlask5 <- unsuperClass(Columbia2013, nClasses=4)  
+CoAlask6 <- unsuperClass(Columbia2019, nClasses=4) 
 
 plot(CoAlask1$map)
 freq(CoAlask1$map)  # freq è la funzione che mi va a calcolare la frequenza 
-# value  count
-# [1,]     1 788270 --> ghiaccio
-# [2,]     2 575664 --> suolo
-# [3,]     3 709666 --> acqua 
+#      value  count
+# [1,]     1 561438 --> acqua 
+# [2,]     2 644303 --> neve 
+# [3,]     3 577552 --> vegetazione
+# [4,]     4 290307 --> ghiaccio
+
+
 plot(CoAlask2$map)
 freq(CoAlask2$map)  
-# value  count
-# [1,]     1 712865 --> acqua 
-# [2,]     2 624172 --> suolo
-# [3,]     3 736563 --> ghiaccio
+#      value  count
+# [1,]     1 579046 --> acqua 
+# [2,]     2 644664 --> vegetazione
+# [3,]     3 491625 --> neve 
+# [4,]     4 358265 --> ghiaccio
+
+
 
 plot(CoAlask3$map)
 freq(CoAlask3$map) 
-# value  count
-# [1,]     1 539413
-# [2,]     2 881089
-# [3,]     3 653098
+#      value  count
+# [1,]     1 710476 --> acqua 
+# [2,]     2 554057 --> vegetazione
+# [3,]     3 417466 --> ghiaccio
+# [4,]     4 391601 --> neve 
+ 
+
 
 plot(CoAlask4$map)
 freq(CoAlask4$map)  
-# value  count
-# [1,]     1 505739
-# [2,]     2 849546
-# [3,]     3 718315
+#      value  count
+# [1,]     1 449513 --> ghiaccio
+# [2,]     2 207420 --> neve 
+# [3,]     3 664488 --> vegetazione
+# [4,]     4 752179 --> acqua 
+
 plot(CoAlask5$map)
 freq(CoAlask5$map)  
-#     value  count
-# [1,]     1 794994 --> ghiaccio
-# [2,]     2 606197 --> suolo 
-# [3,]     3 672409  --> acqua
+#      value  count
+# [1,]     1 290029 --> ghiaccio
+# [2,]     2 608635 --> acqua
+# [3,]     3 393560 --> neve 
+# [4,]     4 781376 --> vegetazione
+
 plot(CoAlask6$map)
 freq(CoAlask6$map)  
-#     value  count
-# [1,]     1 779366 --> acqua
-# [2,]     2 552773 --> ghiaccio
-# [3,]     3 741461 --> suolo 
+#      value  count
+# [1,]     1 589960 --> acqua 
+# [2,]     2 399903 --> neve 
+# [3,]     3 344189 --> vegetazione
+# [4,]     4 739548 --> ghiaccio
+
+
 
 # ora calcoliamo la proporzione 
 #facciamo la somma dei valori 
-s1 <- 783377 + 712478 + 577745
-s1 # = 1495855, questo valore deve essere uguale per tutti 
+s1 <- 561438 + 644303 + 577552 + 290307
+s1 # = 2073600, questo valore deve essere uguale per tutti 
 
 #per lalcolare la proporzione facciamo la frequenza fratto il totale
 prop1 <- freq(CoAlask1$map)/ s1
 prop1
+#            value     count
+# [1,] 4.822531e-07 0.2707552
+# [2,] 9.645062e-07 0.3107171
+# [3,] 1.446759e-06 0.2785262
+# [4,] 1.929012e-06 0.1400014
+
 # proporzione ghiaccio: 0.3777860
 # proporzione acqua: 0.3435947
 # proporzione altro: 0.2786193            
