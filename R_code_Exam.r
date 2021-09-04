@@ -1,3 +1,9 @@
+####################################
+#### ghiacciaio Columbia Alaska ####
+####################################
+
+#######################################################
+### Intro ###
 # R_code_Exam.r
 #  Il ritiro del ghiacciaio Columbia Glacier in Alaska dal 1986 al 2019
 # immagini prese dal sito: https://earthobservatory.nasa.gov/world-of-change/ColumbiaGlacier
@@ -56,6 +62,8 @@ cls<-colorRampPalette(c("white","blue","yellow","green"))(100)
 # Nuovo levelplot col cambio di colori, nome e titolo
 levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
 
+
+
 #............................................................................................................................................................
 
 
@@ -82,7 +90,18 @@ Columbia2005 <- brick("4 columbia_tm5_2005245_lrg.jpg")
 Columbia2013 <- brick("5 columbia_oli_2013203_lrg.jpg")
 Columbia2019 <- brick("6 columbiaglacier653_oli_2019172_lrg.jpg")
 
-
+# ora applichiamo l'algebra applicata alle matrici 
+#utilizzo raster perchè non mi interessa ad avere le 3 bande divise ma una immagine con un'unica banda 
+Columbiaraster1986 <- raster("1 columbia_tm5_1986209_lrg.jpg")
+Columbiaraster2019 <- raster("6 columbiaglacier653_oli_2019172_lrg.jpg")
+#vogliamo fare la sottrazione tra il primo e l'ultimo dato 
+# $ il dollaro mi lega il file originale al file interno 
+Columbiaice <- Columbiaraster2019 - Columbiaraster1986
+# creo una nuoca colour and palette 
+clb <- colorRampPalette(c("blue","white","red"))(100)
+plot(Columbiaice, col=clb) # zone rosse dove c'è stato uno scioglimento dei ghiacci 
+# usiamo level per avere una gamma di colori più dettagliata 
+levelplot(Columbiaice, col.regions=clb, main="Scioglimento del ghiaccio dal 1986 al 2019")
 
 # 2. Analisi delle componenti principali
 
@@ -158,8 +177,8 @@ plot(Columbia2019_pca$model) # per vedere il grafico
 levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
 
 par(mfrow=c(2,3)) # 3 colonne e 2 righe
-plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist") 
-plotRGB(Columbia1995_pca$map,r=1,g=2,b=3, stretch="Hist") 
+plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist", main="DVI of Columbia 1986") 
+plotRGB(Columbia1995_pca$map,r=1,g=2,b=3, stretch="Hist", main="DVI of Columbia 1986") 
 plotRGB(Columbia2001_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2005_pca$map,r=1,g=2,b=3, stretch="Hist")
 plotRGB(Columbia2013_pca$map,r=1,g=2,b=3, stretch="Hist")
@@ -519,7 +538,8 @@ prop6
 
 # si possono usare anche le percentuali, moltiplicando per 100 le proporzioni 
 # ora generiamo un dataset che in R si chiama dataframe 
-# mettiamo in colonna dei fattori che sono delle variabili categoriche = i due fattori sono ghiaccio e acqua 
+# mettiamo in colonna dei fattori che sono delle variabili categoriche
+# ho sommato ghiaccio e neve per avere dati più chiari sulla situazione temporale, come anche vegetazione e nuovole 
 cover <- c("ghiaccio + neve ", "acqua", "vegetazione + nuvole")
 percent_1986 <- c(45.07, 27.07, 27.87)
 percent_1995 <- c(40.97, 27.92, 31.08)
