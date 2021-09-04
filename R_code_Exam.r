@@ -33,6 +33,15 @@ import
 ACi <- stack(import)
 # Funzione per avere le info sul file
 ACi
+# class      : RasterStack 
+# dimensions : 1080, 1920, 2073600, 6  (nrow, ncol, ncell, nlayers)
+# resolution : 1, 1  (x, y)
+# extent     : 0, 1920, 0, 1080  (xmin, xmax, ymin, ymax)
+# crs        : NA 
+# names      : X1_columb//986209_lrg, X2_columb//995202_lrg, X3_columb//001258_lrg, X4_columb//005245_lrg, X5_columb//013203_lrg, X6_columb//019172_lrg 
+# min values :                     0,                     0,                     0,                     0,                     0,                     0 
+# max values :                   255,                   255,                   255,                   255,                   255,                   255
+
 # Funzione plot: del singolo file
 plot(ACi)
 # Funzione plotRGB: crea plot con immagini sovrapposte
