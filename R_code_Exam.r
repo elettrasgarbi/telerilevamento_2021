@@ -467,40 +467,50 @@ s1 # = 2073600, questo valore deve essere uguale per tutti
 prop1 <- freq(CoAlask1$map)/ s1
 prop1
 #            value     count
-# [1,] 4.822531e-07 0.2707552
-# [2,] 9.645062e-07 0.3107171
-# [3,] 1.446759e-06 0.2785262
-# [4,] 1.929012e-06 0.1400014
-
-# proporzione ghiaccio: 0.3777860
-# proporzione acqua: 0.3435947
-# proporzione altro: 0.2786193            
+# [1,] 4.822531e-07 0.2707552 = proporzione acqua 
+# [2,] 9.645062e-07 0.3107171 = proporzione neve 
+# [3,] 1.446759e-06 0.2785262 = proporzione vegetazione
+# [4,] 1.929012e-06 0.1400014 = proporzione ghiaccio 
+          
 prop2 <- freq(CoAlask2$map) / s1
 prop2
-# proporzione ghiaccio: 0.3562042
-# proporzione acqua: 0.3418369
-# proporzione altro: 0.3019589
+#             value     count
+# [1,] 4.822531e-07 0.2792467 = proporzione acqua
+# [2,] 9.645062e-07 0.3108912 = proporzione vegetazione
+# [3,] 1.446759e-06 0.2370877 = proporzione neve 
+# [4,] 1.929012e-06 0.1727744 = proporzione ghiaccio
+
 prop3 <- freq(CoAlask3$map) / s1
 prop3
-# proporzione ghiaccio: 0.2627267
-# proporzione acqua: 0.3233705
-# proporzione altro: 0.4139029
+#            value     count
+# [1,] 4.822531e-07 0.3426292 = proporzione acqua
+# [2,] 9.645062e-07 0.2671957 = proporzione vegetazione
+# [3,] 1.446759e-06 0.2013243 = proporzione ghiaccio
+# [4,] 1.929012e-06 0.1888508 = proporzione neve 
+
 prop4 <- freq(CoAlask4$map) / s1
 prop4
-# proporzione ghiaccio: 0.2438942
-# proporzione acqua: 0.4096962
-# proporzione altro: 0.3464096
+#            value     count
+# [1,] 4.822531e-07 0.2167790 = proporzione ghiaccio
+# [2,] 9.645062e-07 0.1000289 = proporzione neve
+# [3,] 1.446759e-06 0.3204514 = proporzione vegetazione 
+# [4,] 1.929012e-06 0.3627406 = proporzione acqua 
+
 prop5 <- freq(CoAlask5$map) / s1
 prop5
-# proporzione ghiaccio: 0.2923404
-# proporzione acqua: 0.3242713
-# proporzione suolo: 0.3833883
+#            value     count
+# [1,] 4.822531e-07 0.1398674 = proporzione ghiaccio
+# [2,] 9.645062e-07 0.2935161 = proporzione acqua 
+# [3,] 1.446759e-06 0.1897955 = proporzione neve 
+# [4,] 1.929012e-06 0.3768210 = proporzione vegetazione 
+
 prop6 <- freq(CoAlask6$map) / s1 
 prop6
-# proporzione ghiaccio: 0.3758517
-# proporzione acqua: 0.2665765
-# proporzione suoloo: 0.3575719
-
+#             value     count
+# [1,] 4.822531e-07 0.2845100 = proporzione acqua 
+# [2,] 9.645062e-07 0.1928545 = proporzione neve 
+# [3,] 1.446759e-06 0.1659862 = proporzione vegetazione
+# [4,] 1.929012e-06 0.3566493 = proporzione ghiaccio 
 
 #mettiamo in proporzione le frequenze per trovare dei valori in percentuale
 # prima colonna dove mettiamo i fattori doce ci sarà ghiaccio e acqua
@@ -510,62 +520,21 @@ prop6
 # si possono usare anche le percentuali, moltiplicando per 100 le proporzioni 
 # ora generiamo un dataset che in R si chiama dataframe 
 # mettiamo in colonna dei fattori che sono delle variabili categoriche = i due fattori sono ghiaccio e acqua 
-cover <- c("Ice", "Water", "land")
-percent_1986 <- c(37.77, 34.35, 27.86)
-percent_1995 <- c(35.62, 34.18, 30.19)
-percent_2001 <- c(26.27, 32.33, 41.39)
-percent_2005 <- c(24.38, 40.96, 40.96)
-percent_2013 <- c(29.23, 32.42, 38.33)
-percent_2019 <- c(37.58, 26.65, 35.75)
+cover <- c("ghiaccio + neve ", "acqua", "vegetazione + nuvole")
+percent_1986 <- c(45.07, 27.07, 27.87)
+percent_1995 <- c(40.97, 27.92, 31.08)
+percent_2001 <- c(39.01, 34.26, 26.71)
+percent_2005 <- c(21.67, 36.27, 42.04)
+percent_2013 <- c(32.95, 29.35, 37.68)
+percent_2019 <- c(35.66, 28.45, 35.87)
 
 # per crare il nostro data Frames uso la funzione data.frame
 percentages <- data.frame(cover, percent_1986, percent_1995, percent_2001, percent_2005, percent_2013, percent_2019)
 percentages
-# cover percent_1986 percent_1995 percent_2001 percent_2005 percent_2013 percent_2019
-# 1   Ice        37.77        35.62        26.27        24.38        29.23        37.58
-# 2 Water        34.35        34.18        32.33        40.96        32.42        26.65
-# 3  land        27.86        30.19        41.39        40.96        38.33        35.75
-
-
-
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-percentages <- data.frame("Ice", "Water"),
-               
-percentages
-percentages <- data.frame("D1", "D2"),
-                len=c(37.58, 26.65))
-
-df <- data.frame(dose=c("D1", "D2"),
-                len=c(37.58, 26.65))
-
-p<-ggplot(data=df, aes(x=dose, y=len)) +
-  geom_bar(stat="identity")
-p
-p + coord_flip()
-
-p<-ggplot(data=df, aes(x=dose, y=len)) +
-  geom_bar(stat="identity", fill="steelblue")+
-  theme_minimal()
-
-ggplot(data=df, aes(x=dose, y=len)) +
-  geom_bar(stat="identity", fill="steelblue")+
-  geom_text(aes(label=len), vjust=-0.3, size=3.5)+
-  theme_minimal()
-
-# Change barplot fill colors by groups
-p<-ggplot(df, aes(x=dose, y=len, fill=dose)) +
-  geom_bar(stat="identity")+theme_minimal()
-p
-
-C1 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
-C1 + coord_flip()
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
+#                  cover percent_1986 percent_1995 percent_2001 percent_2005 percent_2013 percent_2019
+# 1     ghiaccio + neve         45.07        40.97        39.01        21.67        32.95        35.66
+# 2                acqua        27.07        27.92        34.26        36.27        29.35        28.45
+# 3 vegetazione + nuvole        27.87        31.08        26.71        42.04        37.68        35.87
 
 
 # ora tracciamo i grafici 
