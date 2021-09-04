@@ -396,23 +396,23 @@ CoAlask6 <- unsuperClass(Columbia2019, nClasses=3)
 plot(CoAlask1$map)
 freq(CoAlask1$map)  # freq è la funzione che mi va a calcolare la frequenza 
 # value  count
-# [1,]     1 783377 --> ghiaccio
-# [2,]     2 712478 --> acqua
-# [3,]     3 577745 --> altro
-
-
+# [1,]     1 788270 --> ghiaccio
+# [2,]     2 575664 --> suolo
+# [3,]     3 709666 --> acqua 
 plot(CoAlask2$map)
 freq(CoAlask2$map)  
 # value  count
-# [1,]     1 738625
-# [2,]     2 708833
-# [3,]     3 626142
+# [1,]     1 712865 --> acqua 
+# [2,]     2 624172 --> suolo
+# [3,]     3 736563 --> ghiaccio
+
 plot(CoAlask3$map)
 freq(CoAlask3$map) 
 # value  count
-# [1,]     1 544790
-# [2,]     2 670541
-# [3,]     3 858269
+# [1,]     1 539413
+# [2,]     2 881089
+# [3,]     3 653098
+
 plot(CoAlask4$map)
 freq(CoAlask4$map)  
 # value  count
@@ -422,15 +422,15 @@ freq(CoAlask4$map)
 plot(CoAlask5$map)
 freq(CoAlask5$map)  
 #     value  count
-# [1,]     1 794994
-# [2,]     2 606197
-# [3,]     3 672409
+# [1,]     1 794994 --> ghiaccio
+# [2,]     2 606197 --> suolo 
+# [3,]     3 672409  --> acqua
 plot(CoAlask6$map)
 freq(CoAlask6$map)  
 #     value  count
-# [1,]     1 779366
-# [2,]     2 552773
-# [3,]     3 741461
+# [1,]     1 779366 --> acqua
+# [2,]     2 552773 --> ghiaccio
+# [3,]     3 741461 --> suolo 
 
 # ora calcoliamo la proporzione 
 #facciamo la somma dei valori 
@@ -460,14 +460,14 @@ prop4
 # proporzione altro: 0.3464096
 prop5 <- freq(CoAlask5$map) / s1
 prop5
-# proporzione ghiaccio: 0.3833883
-# proporzione acqua: 0.2923404
-# proporzione altro: 0.3242713
+# proporzione ghiaccio: 0.2923404
+# proporzione acqua: 0.3242713
+# proporzione suolo: 0.3833883
 prop6 <- freq(CoAlask6$map) / s1 
 prop6
 # proporzione ghiaccio: 0.3758517
 # proporzione acqua: 0.2665765
-# proporzione altro: 0.3575719
+# proporzione suoloo: 0.3575719
 
 
 #mettiamo in proporzione le frequenze per trovare dei valori in percentuale
@@ -478,20 +478,23 @@ prop6
 # si possono usare anche le percentuali, moltiplicando per 100 le proporzioni 
 # ora generiamo un dataset che in R si chiama dataframe 
 # mettiamo in colonna dei fattori che sono delle variabili categoriche = i due fattori sono ghiaccio e acqua 
-cover <- c("Ice", "Water")
-percent_1986 <- c(37.77, 34.35)
-percent_1995 <- c(35.62, 34.18)
-percent_2001 <- c(26.27, 32.33)
-percent_2005 <- c(24.38, 40.96)
-percent_2013 <- c(38.33, 29.23)
-percent_2019 <- c( 37.58, 26.65)
+cover <- c("Ice", "Water", "land")
+percent_1986 <- c(37.77, 34.35, 27.86)
+percent_1995 <- c(35.62, 34.18, 30.19)
+percent_2001 <- c(26.27, 32.33, 41.39)
+percent_2005 <- c(24.38, 40.96, 40.96)
+percent_2013 <- c(29.23, 32.42, 38.33)
+percent_2019 <- c(37.58, 26.65, 35.75)
 
 # per crare il nostro data Frames uso la funzione data.frame
 percentages <- data.frame(cover, percent_1986, percent_1995, percent_2001, percent_2005, percent_2013, percent_2019)
 percentages
 # cover percent_1986 percent_1995 percent_2001 percent_2005 percent_2013 percent_2019
-# 1   Ice        37.77        35.62        26.27        24.38        38.33        37.58
-# 2 Water        34.35        34.18        32.33        40.96        29.23        26.65
+# 1   Ice        37.77        35.62        26.27        24.38        29.23        37.58
+# 2 Water        34.35        34.18        32.33        40.96        32.42        26.65
+# 3  land        27.86        30.19        41.39        40.96        38.33        35.75
+
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -551,11 +554,11 @@ C2 <- ggplot(percentages, aes(x=cover, y=percent_1995, fill=cover)) + geom_bar(s
 C2 + coord_flip()
 C3 <- ggplot(percentages, aes(x=cover, y=percent_2001, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
 C3 + coord_flip()
-C4 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C4 <- ggplot(percentages, aes(x=cover, y=percent_2005, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
 C4 + coord_flip()
-C5 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C5 <- ggplot(percentages, aes(x=cover, y=percent_2013, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
 C5 + coord_flip()
-C6 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C6 <- ggplot(percentages, aes(x=cover, y=percent_2019, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
 C6 + coord_flip()
 # uso l funzione grid.arrange per mettere i grafici in una pagina  della gridextra già installato
 grid.arrange(C1 + coord_flip(), C2 + coord_flip(), C3 + coord_flip(), C4 + coord_flip(), C5 + coord_flip(), C6 + coord_flip(), nrow=2)
