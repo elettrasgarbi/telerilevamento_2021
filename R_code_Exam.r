@@ -376,7 +376,8 @@ Columbia2019p2 <- c(9, 32, 73)
 Columbia2019p3 <- c(8, 28, 81)
 
 # Funzione data.frame: crea un dataframe (tabella)
-spectralCo <- data.frame(band,Columbia1986p1,Columbia1986p2,Columbia1986p3,Columbia2019p1,Columbia2019p2,Columbia2019p3)
+spectralCo <- data.frame(data = rep(c("1986", "2019"), each=3), band,Columbia1986p1,Columbia1986p2,Columbia1986p3,Columbia2019p1,Columbia2019p2,Columbia2019p3)
+
 
 # richiamo spectralst per avere le info sul file
 spectralCo
@@ -400,17 +401,19 @@ geom_line(aes(y = Columbia2019p2), color="red") +
 geom_line(aes(y = Columbia2019p3), color="red") +
 labs(x="band", y="reflectance")
 
-# Traccio questo set di dati con altri colori
-# Il colore chiaro rappresenta i risultati del 1986, il colore scuro rappresenta i risultati del 2019
+# Traccio questo set di dati con altri colori e linee evidenziando i punti fondamentali
+# Ilcolore chiaro e linea non continua rappresenta i risultati del 1986, il colore scuro pieno rappresenta i risultati del 2019
 ggplot(spectralCo, aes(x=band)) +
-geom_line(aes(y = Columbia1986p1), color="light blue") +
-geom_line(aes(y = Columbia1986p2), color="pink") +
-geom_line(aes(y = Columbia1986p3), color="yellow") +
-geom_line(aes(y = Columbia2019p1), color="orange") +
-geom_line(aes(y = Columbia2019p2), color="blue") +
-geom_line(aes(y = Columbia2019p3), color="purple") +
-labs(x="band", y="reflectance")
+geom_line(aes(y = Columbia1986p1), linetype="dotdash", color="light blue", size=2)+ geom_point(aes(y = Columbia1986p1), color="light blue", size=3) + 
+geom_line(aes(y = Columbia1986p2), linetype="dotdash", color="pink", size=2) + geom_point(aes(y = Columbia1986p2), color="pink", size=3) + 
+geom_line(aes(y = Columbia1986p3), linetype="dotdash", color="yellow", size=2) + geom_point(aes(y = Columbia1986p3), color="yellow", size=3) + 
+geom_line(aes(y = Columbia2019p1), color="orange", size=2) + geom_point(aes(y = Columbia2019p1), color="orange", size=3) + 
+geom_line(aes(y = Columbia2019p2), color="blue", size=2) + geom_point(aes(y = Columbia2019p2), color="blue", size=3) + 
+geom_line(aes(y = Columbia2019p3), color="purple", size=2) + geom_point(aes(y = Columbia2019p3), color="purple", size=3) + 
+labs(x="band", y="reflectance") 
+
 #questo procedimento normalmente si fa con moltissimi pixel. si usa una funzione per la generazione dei punti random e poi un'altra per estrarre da tutti i valori delle bande
+
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -585,7 +588,7 @@ C6 + coord_flip()
 grid.arrange(C1 + coord_flip(), C2 + coord_flip(), C3 + coord_flip(), C4 + coord_flip(), C5 + coord_flip(), C6 + coord_flip(), nrow=2)
 
 
-#ptovo a modificare il grafico cambiando le coordinate
+# modifico il grafico cambiando le coordinate
 C1 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
 C1 + coord_polar(theta = "x", direction=1 )
 C1 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
@@ -604,6 +607,5 @@ C6 + coord_polar(theta = "x", direction=1 )
 grid.arrange(C1 + coord_polar(theta = "x", direction=1 ), C2 + coord_polar(theta = "x", direction=1 ), C3 + coord_polar(theta = "x", direction=1 ), 
              C4 + coord_polar(theta = "x", direction=1 ), C5 + coord_polar(theta = "x", direction=1 ), C6 + coord_polar(theta = "x", direction=1 ))
 
-
-
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
