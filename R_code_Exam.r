@@ -376,7 +376,7 @@ Columbia2019p2 <- c(9, 32, 73)
 Columbia2019p3 <- c(8, 28, 81)
 
 # Funzione data.frame: crea un dataframe (tabella)
-spectralCo <- data.frame(data = rep(c("1986", "2019"), each=3), band,Columbia1986p1,Columbia1986p2,Columbia1986p3,Columbia2019p1,Columbia2019p2,Columbia2019p3)
+spectralCo <- data.frame(band,Columbia1986p1,Columbia1986p2,Columbia1986p3,Columbia2019p1,Columbia2019p2,Columbia2019p3)
 
 
 # richiamo spectralst per avere le info sul file
