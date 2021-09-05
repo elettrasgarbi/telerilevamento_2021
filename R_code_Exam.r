@@ -424,7 +424,19 @@ labs(x="band", y="reflectance")
 
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
-#effettuiamo una categorizzazione in 3 classi di colore per distinguere le zone con ghiaccio, con acqua e "altro"
+#una mappa di vegetazione è molto più particolare di una mappa di copertura, per poterla fare ci servono dei dati iperspettrali.
+#avendo molte bande, esse ci permettono di individuare specie diverse in base ai diversi valori di riflettanza. Bisogna riuscire a vedere le diverse firme spettrali.
+
+# unsupervised classification
+#si chiama così perchè è il software che scegli random un campione di pixel nell'immagine da dividere in classi
+
+set.seed(42)
+#la divisioni in classi è random, nel senso che, anche se il numero è sempre 4, 
+#una volta la classe 1 è la foresta e la classe 2 la parte agricola ma se chiudo R e rifaccio questa operazione si possono invertire.
+#per evitare questa cosa esiste la funzione set.seed() che ci permette di assegnare un numero al risultato 
+#(nel nostro caso la suddivisione in classi) della funzione così che non cambi mai.
+
+#effettuiamo una categorizzazione in 4 classi di colore per distinguere le zone con ghiaccio, con acqua e "altro"
 CoAlask1 <- unsuperClass(Columbia1986, nClasses=4)  
 CoAlask2 <- unsuperClass(Columbia1995, nClasses=4)  
 CoAlask3 <- unsuperClass(Columbia2001, nClasses=4)  
@@ -432,6 +444,19 @@ CoAlask4 <- unsuperClass(Columbia2005, nClasses=4)
 CoAlask5 <- unsuperClass(Columbia2013, nClasses=4)  
 CoAlask6 <- unsuperClass(Columbia2019, nClasses=4) 
 
+# metto le immagini insieme per avere una mappa della situazione 
+par(mfrow=c(2,3)) # 3 colonne e 2 righe
+plot(CoAlask1$map)
+plot(CoAlask2$map)
+plot(CoAlask3$map)
+plot(CoAlask4$map)
+plot(CoAlask5$map)
+plot(CoAlask6$map)
+
+#ora proviamo a calcolare la frequenza dei pixel di una certa classe.
+#lo possiamo fare con la funzion freq 
+
+set.seed(42)
 plot(CoAlask1$map)
 freq(CoAlask1$map)  # freq è la funzione che mi va a calcolare la frequenza 
 #      value  count
@@ -440,7 +465,7 @@ freq(CoAlask1$map)  # freq è la funzione che mi va a calcolare la frequenza
 # [3,]     3 577552 --> vegetazione
 # [4,]     4 290307 --> ghiaccio
 
-
+set.seed(42)
 plot(CoAlask2$map)
 freq(CoAlask2$map)  
 #      value  count
@@ -450,7 +475,7 @@ freq(CoAlask2$map)
 # [4,]     4 358265 --> ghiaccio
 
 
-
+set.seed(42)
 plot(CoAlask3$map)
 freq(CoAlask3$map) 
 #      value  count
@@ -460,7 +485,7 @@ freq(CoAlask3$map)
 # [4,]     4 391601 --> neve 
  
 
-
+set.seed(42)
 plot(CoAlask4$map)
 freq(CoAlask4$map)  
 #      value  count
@@ -469,6 +494,7 @@ freq(CoAlask4$map)
 # [3,]     3 664488 --> vegetazione
 # [4,]     4 752179 --> acqua 
 
+set.seed(42)
 plot(CoAlask5$map)
 freq(CoAlask5$map)  
 #      value  count
@@ -477,6 +503,7 @@ freq(CoAlask5$map)
 # [3,]     3 393560 --> neve 
 # [4,]     4 781376 --> vegetazione
 
+set.seed(42)
 plot(CoAlask6$map)
 freq(CoAlask6$map)  
 #      value  count
