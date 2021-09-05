@@ -568,7 +568,7 @@ ggplot(percentages, aes(x=cover, y=percent_2005, color=cover)) + geom_bar(stat="
 ggplot(percentages, aes(x=cover, y=percent_2013, color=cover)) + geom_bar(stat="identity", fill="orange")
 ggplot(percentages, aes(x=cover, y=percent_2019, color=cover)) + geom_bar(stat="identity", fill="green")
 
-# metto in un unico grafico tutte le date
+# metto in un unico grafico tutte le date posizionandolo in orizzontale
 C1 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
 C1 + coord_flip()
 C2 <- ggplot(percentages, aes(x=cover, y=percent_1995, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
@@ -585,10 +585,24 @@ C6 + coord_flip()
 grid.arrange(C1 + coord_flip(), C2 + coord_flip(), C3 + coord_flip(), C4 + coord_flip(), C5 + coord_flip(), C6 + coord_flip(), nrow=2)
 
 
-
-
-
-
+#ptovo a modificare il grafico cambiando le coordinate
+C1 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C1 + coord_polar(theta = "x", direction=1 )
+C1 <- ggplot(percentages, aes(x=cover, y=percent_1986, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C1 + coord_polar(theta = "x", direction=1 )
+C2 <- ggplot(percentages, aes(x=cover, y=percent_1995, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C2 + coord_polar(theta = "x", direction=1 )
+C3 <- ggplot(percentages, aes(x=cover, y=percent_2001, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C3 + coord_polar(theta = "x", direction=1 )
+C4 <- ggplot(percentages, aes(x=cover, y=percent_2005, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C4 + coord_polar(theta = "x", direction=1 )
+C5 <- ggplot(percentages, aes(x=cover, y=percent_2013, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C5 + coord_polar(theta = "x", direction=1 )
+C6 <- ggplot(percentages, aes(x=cover, y=percent_2019, fill=cover)) + geom_bar(stat="identity") + theme_minimal()
+C6 + coord_polar(theta = "x", direction=1 )
+# uso l funzione grid.arrange per mettere i grafici in una pagina  della gridextra già installato
+grid.arrange(C1 + coord_polar(theta = "x", direction=1 ), C2 + coord_polar(theta = "x", direction=1 ), C3 + coord_polar(theta = "x", direction=1 ), 
+             C4 + coord_polar(theta = "x", direction=1 ), C5 + coord_polar(theta = "x", direction=1 ), C6 + coord_polar(theta = "x", direction=1 ))
 
 
 
