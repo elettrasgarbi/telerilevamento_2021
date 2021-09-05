@@ -175,7 +175,8 @@ plotRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist")
 plot(Columbia2019_pca$model) # per vedere il grafico
 
 # confrontiamo le PCA ottenute dal 1986 al 2019
-levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
+levelplot(ACi,col.regions=cls, main="Variazione della copertura di ghiaccio nel tempo", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
+
 
 par(mfrow=c(2,3)) # 3 colonne e 2 righe
 plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist") 
@@ -196,25 +197,6 @@ grid.arrange(Co1986, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2, top = textG
 
 C <- grid.arrange(Co1986, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2, top = textGrob("Ghiacciaio Columbia 1986-2019",gp=gpar(fontsize=25,font=4)))
 ggsave("grid.arrange.jpg",C) # bisogna specificare cosa salvare esplicitamente, altrimenti salva solo l'ultimo grafico non l'intero grid.arrange
-
-
-
-                                                                        #????????????????????????????????????????????????????? come mettere il titolo
-par(mfrow=c(2,3)) # 3 colonne e 2 righe                                 levelplot(ACi,col.regions=cls, main="Variation ice cover in time", names.attr=c("1986","1995", "2001", "2005", "2013", "2019"))
-plotRGB(Columbia1986_pca$map,r=1,g=2,b=3, stretch="Hist")   
-plotRGB(Columbia1995_pca$map,r=1,g=2,b=3, stretch="Hist") 
-plotRGB(Columbia2001_pca$map,r=1,g=2,b=3, stretch="Hist") 
-plotRGB(Columbia2005_pca$map,r=1,g=2,b=3, stretch="Hist") 
-plotRGB(Columbia2013_pca$map,r=1,g=2,b=3, stretch="Hist")
-plotRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist") 
-
-Co1986 <- ggRGB(Columbia1986_pca$map,r=1,g=2,b=3, aes(x1)), stretch="Hist")       
-Co1995 <- ggRGB(Columbia1995_pca$map,r=1,g=2,b=3, aes(x1)), stretch="Hist") 
-Co2001 <- ggRGB(Columbia2001_pca$map,r=1,g=2,b=3, aes(x1)), stretch="Hist") 
-Co2005 <- ggRGB(Columbia2005_pca$map,r=1,g=2,b=3, aes(x1)), stretch="Hist") 
-Co2013 <- ggRGB(Columbia2013_pca$map,r=1,g=2,b=3, aes(x1)), stretch="Hist") 
-Co2019 <- ggRGB(Columbia2019_pca$map,r=1,g=2,b=3, aes(x1)), stretch="Hist") 
-grid.arrange(Co1986, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2, top = textGrob("Ghiacciaio Columbia 1986-2019",gp=gpar(fontsize=20,font=3)))
 
 
 
