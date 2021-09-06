@@ -5,7 +5,7 @@
 #######################################################
 ### Intro ###
 # R_code_Exam_ Columbia_Glacier.r
-#  Il ritiro del ghiacciaio Columbia Glacier in Alaska dal 1986 al 2019
+#  Il ritiro del ghiacciaio Columbia in Alaska dal 1986 al 2019
 # immagini prese dal sito: https://earthobservatory.nasa.gov/world-of-change/ColumbiaGlacier
 
 # caricamento delle library necessarie al funzionamento dei codici seguenti:
