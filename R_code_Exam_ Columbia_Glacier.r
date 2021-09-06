@@ -91,6 +91,15 @@ Columbia2005 <- brick("4 columbia_tm5_2005245_lrg.jpg")
 Columbia2013 <- brick("5 columbia_oli_2013203_lrg.jpg")
 Columbia2019 <- brick("6 columbiaglacier653_oli_2019172_lrg.jpg")
 
+par(mfrow=c(2,3))
+plotRGB(Columbia1986, r=1, g=2, b=3, stretch="lin")
+plotRGB(Columbia1995, r=1, g=2, b=3, stretch="lin")
+plotRGB(Columbia2001, r=1, g=2, b=3, stretch="lin")
+plotRGB(Columbia2005, r=1, g=2, b=3, stretch="lin")
+plotRGB(Columbia2013, r=1, g=2, b=3, stretch="lin")
+plotRGB(Columbia2019, r=1, g=2, b=3, stretch="lin")
+
+
 # ora applichiamo l'algebra applicata alle matrici 
 #utilizzo raster perchè non mi interessa ad avere le 3 bande divise ma una immagine con un'unica banda 
 Columbiaraster1986 <- raster("1 columbia_tm5_1986209_lrg.jpg")
