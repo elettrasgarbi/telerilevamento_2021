@@ -7,6 +7,12 @@
 # R_code_Exam_ Columbia_Glacier.r
 #  Il ritiro del ghiacciaio Columbia in Alaska dal 1986 al 2019
 # immagini prese dal sito: https://earthobservatory.nasa.gov/world-of-change/ColumbiaGlacier
+# È uno dei ghiacciai che cambia più rapidamente nel mondo
+# Le instabilità dinamiche sono comuni ai ghiacciai marini-terminali e permettono un trasferimento di massa terra-mare molto rapido, 
+# tanto che questi ghiacciai costituiscono una delle più grandi componenti dell'innalzamento globale del livello del mare eustatico
+
+
+
 
 # caricamento delle library necessarie al funzionamento dei codici seguenti:
 library(raster)  # permette l'utilizzo dei raster e funzioni annesse
@@ -205,7 +211,11 @@ Co2019 <- ggRGB(Columbia2019_pca$map,r=1,g=2,b=3, stretch="Hist")
 grid.arrange(Co1986, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2, top = textGrob("Ghiacciaio Columbia 1986-2019",gp=gpar(fontsize=25,font=4)))
 
 C <- grid.arrange(Co1986, Co1995, Co2001, Co2005, Co2013, Co2019, nrow=2, top = textGrob("Ghiacciaio Columbia 1986-2019",gp=gpar(fontsize=25,font=4)))
-ggsave("grid.arrange.jpg",C) # bisogna specificare cosa salvare esplicitamente, altrimenti salva solo l'ultimo grafico non l'intero grid.arrange
+
+ggsave("grid.arrange.jpg",C) 
+
+# ggsave è la funzione che mi permette di salvare direttamente le immagini 
+# bisogna specificare cosa salvare esplicitamente, altrimenti salva solo l'ultimo grafico non l'intero grid.arrange
 
 
 
@@ -428,6 +438,8 @@ geom_line(aes(y = Columbia2019p2), color="blue", size=2) + geom_point(aes(y = Co
 geom_line(aes(y = Columbia2019p3), color="purple", size=2) + geom_point(aes(y = Columbia2019p3), color="purple", size=3) + 
 labs(x="band", y="reflectance") 
 
+#la funzione linetype mi permette di tratteggiare le linee
+# geom_poit mi evidenzia i punti di flesso
 #questo procedimento normalmente si fa con moltissimi pixel. si usa una funzione per la generazione dei punti random e poi un'altra per estrarre da tutti i valori delle bande
 
 
@@ -649,6 +661,9 @@ C6 + coord_polar(theta = "x", direction=1 )
 # uso l funzione grid.arrange per mettere i grafici in una pagina  della gridextra già installato
 grid.arrange(C1 + coord_polar(theta = "x", direction=1 ), C2 + coord_polar(theta = "x", direction=1 ), C3 + coord_polar(theta = "x", direction=1 ), 
              C4 + coord_polar(theta = "x", direction=1 ), C5 + coord_polar(theta = "x", direction=1 ), C6 + coord_polar(theta = "x", direction=1 ))
+
+# la funzione coord_polard mi permette di visualizzare il grafico in modo circolare e particolare
+
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
