@@ -8,11 +8,6 @@
 #  Il ritiro del ghiacciaio Columbia in Alaska dal 1986 al 2019
 # immagini prese dal sito: https://earthobservatory.nasa.gov/world-of-change/ColumbiaGlacier
 # È uno dei ghiacciai che cambia più rapidamente nel mondo
-# Le instabilità dinamiche sono comuni ai ghiacciai marini-terminali e permettono un trasferimento di massa terra-mare molto rapido, 
-# tanto che questi ghiacciai costituiscono una delle più grandi componenti dell'innalzamento globale del livello del mare eustatico
-
-
-
 
 # caricamento delle library necessarie al funzionamento dei codici seguenti:
 library(raster)  # permette l'utilizzo dei raster e funzioni annesse
